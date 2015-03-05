@@ -30,3 +30,8 @@ GLOBAL OPTIONS:
    --help, -h                       show help
    --version, -v                    print the version
 ```
+
+
+### License
+
+Code and documentation copyright 2015 Brian Morton. Code released under the MIT license.
