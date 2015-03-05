@@ -13,7 +13,7 @@ func NewDeployCommand() cli.Command {
 	return cli.Command{
 		Name:        "deploy",
 		ShortName:   "d",
-		Usage:       "deploy a given service and version to the cluster",
+		Usage:       "Deploys a given service and version to the cluster",
 		Description: "deploy [service] [version]",
 		Flags: []cli.Flag{
 			cli.BoolFlag{Name: "skip-destroy-previous", Usage: "skip old version destruction after successful deploy (if possible)"},

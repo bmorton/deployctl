@@ -15,7 +15,7 @@ func NewListCommand() cli.Command {
 	return cli.Command{
 		Name:        "list",
 		ShortName:   "l",
-		Usage:       "list all instances of a given service running on the cluster",
+		Usage:       "Lists all instances of a given service running on the cluster",
 		Description: "list [service]",
 		Action: func(ctx *cli.Context) {
 			if len(ctx.Args()) == 0 {

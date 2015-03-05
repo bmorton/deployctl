@@ -13,7 +13,7 @@ func NewDestroyCommand() cli.Command {
 	return cli.Command{
 		Name:        "destroy",
 		ShortName:   "x",
-		Usage:       "destroy all instances of a given service and version running on the cluster",
+		Usage:       "Destroys all instances of a given service and version running on the cluster",
 		Description: "destroy [service] [version]",
 		Action: func(ctx *cli.Context) {
 			service, version, err := extractServiceVersionParameters(ctx)

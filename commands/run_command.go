@@ -16,7 +16,7 @@ func NewRunCommand() cli.Command {
 	return cli.Command{
 		Name:        "run",
 		ShortName:   "r",
-		Usage:       "run a task for a given service and version",
+		Usage:       "Runs a task for a given service and version",
 		Description: "run [service] [version] [command]",
 		Action: func(ctx *cli.Context) {
 			service, version, command, err := extractRunParameters(ctx)

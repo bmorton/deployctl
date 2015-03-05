@@ -17,16 +17,16 @@ AUTHOR:
   Brian Morton - <brian@mmm.hm>
 
 COMMANDS:
-   deploy, d   deploy a given service and version to the cluster
-   run, r   run a task for a given service and version
-   destroy, x  destroy all instances of a given service and version running on the cluster
-   list, l  list all instances of a given service running on the cluster
-   help, h  Shows a list of commands or help for one command
+   deploy, d    Deploys a given service and version to the cluster
+   run, r       Runs a task for a given service and version
+   destroy, x   Destroys all instances of a given service and version running on the cluster
+   list, l      Lists all instances of a given service running on the cluster
+   help, h      Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --url "http://localhost:3000" a URL to the deployster instance [$DEPLOYSTER_URL]
-   --username "deployster"    username for authenticating to deployster [$DEPLOYSTER_USERNAME]
-   --password           password for authenticating to deployster [$DEPLOYSTER_PASSWORD]
-   --help, -h           show help
-   --version, -v        print the version
+   --url "http://localhost:3000"    a URL to the deployster instance [$DEPLOYSTER_URL]
+   --username "deployster"          username for authenticating to deployster [$DEPLOYSTER_USERNAME]
+   --password                       password for authenticating to deployster [$DEPLOYSTER_PASSWORD]
+   --help, -h                       show help
+   --version, -v                    print the version
 ```
