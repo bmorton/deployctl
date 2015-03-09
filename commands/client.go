@@ -9,5 +9,7 @@ func getClientFromContext(ctx *cli.Context) *client.Client {
 	username := ctx.GlobalString("username")
 	password := ctx.GlobalString("password")
 	baseURL := ctx.GlobalString("url")
-	return client.New(baseURL, username, password)
+	caCert := ctx.GlobalString("ca-cert")
+
+	return client.New(baseURL, username, password, caCert)
 }
