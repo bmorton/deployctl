@@ -11,7 +11,7 @@ USAGE:
    deployctl [global options] command [command options] [arguments...]
 
 VERSION:
-   v0.1.0
+   v0.2.0-dev
 
 AUTHOR:
   Brian Morton - <brian@mmm.hm>
