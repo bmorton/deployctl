@@ -18,6 +18,7 @@ func main() {
 		cli.StringFlag{Name: "url", Value: "http://localhost:3000", Usage: "a URL to the deployster instance", EnvVar: "DEPLOYSTER_URL"},
 		cli.StringFlag{Name: "username", Value: "deployster", Usage: "username for authenticating to deployster", EnvVar: "DEPLOYSTER_USERNAME"},
 		cli.StringFlag{Name: "password", Value: "", Usage: "password for authenticating to deployster", EnvVar: "DEPLOYSTER_PASSWORD"},
+		cli.StringFlag{Name: "ca-cert", Value: "", Usage: "path of CA certificate to use for connecting via SSL", EnvVar: "DEPLOYSTER_CA_CERT"},
 	}
 	app.Commands = []cli.Command{
 		commands.NewDeployCommand(),

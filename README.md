@@ -27,6 +27,7 @@ GLOBAL OPTIONS:
    --url "http://localhost:3000"    a URL to the deployster instance [$DEPLOYSTER_URL]
    --username "deployster"          username for authenticating to deployster [$DEPLOYSTER_USERNAME]
    --password                       password for authenticating to deployster [$DEPLOYSTER_PASSWORD]
+   --ca-cert                        path of CA certificate to use for connecting via SSL [$DEPLOYSTER_CA_CERT]
    --help, -h                       show help
    --version, -v                    print the version
 ```

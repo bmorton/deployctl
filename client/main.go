@@ -2,17 +2,22 @@ package client
 
 import (
 	"bytes"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/bmorton/deployster/server"
 )
 
 type Client struct {
-	BaseURL  string
-	Username string
-	Password string
+	BaseURL    string
+	Username   string
+	Password   string
+	connection *http.Client
 }
 
 type Unit server.VersionedUnit
@@ -20,8 +25,30 @@ type UnitsResponse struct {
 	Units []*Unit `json:"units"`
 }
 
-func New(baseURL string, username string, password string) *Client {
-	return &Client{BaseURL: baseURL, Username: username, Password: password}
+func New(baseURL string, username string, password string, certPath string) *Client {
+	transport := &http.Transport{}
+
+	if certPath != "" {
+		certPool := x509.NewCertPool()
+
+		customCert, err := ioutil.ReadFile(certPath)
+		if err != nil {
+			log.Fatal("Could not load CA certificate!")
+		}
+
+		done := certPool.AppendCertsFromPEM(customCert)
+		if !done {
+			log.Fatal("Could not append CA certificate!")
+		}
+
+		transport.TLSClientConfig = &tls.Config{RootCAs: certPool, InsecureSkipVerify: false}
+	}
+
+	connection := &http.Client{
+		Transport: transport,
+	}
+
+	return &Client{BaseURL: baseURL, Username: username, Password: password, connection: connection}
 }
 
 func (c *Client) CreateDeploy(service string, version string, destroyPrevious bool, instanceCount int) (*http.Response, error) {
@@ -46,8 +73,7 @@ func (c *Client) CreateDeploy(service string, version string, destroyPrevious bo
 	req.SetBasicAuth(c.Username, c.Password)
 	req.Header.Add("Content-Type", "application/json")
 
-	client := &http.Client{}
-	return client.Do(req)
+	return c.connection.Do(req)
 }
 
 func (c *Client) CreateTask(service string, version string, command string) (*http.Response, error) {
@@ -71,8 +97,7 @@ func (c *Client) CreateTask(service string, version string, command string) (*ht
 	req.SetBasicAuth(c.Username, c.Password)
 	req.Header.Add("Content-Type", "application/json")
 
-	client := &http.Client{}
-	return client.Do(req)
+	return c.connection.Do(req)
 }
 
 func (c *Client) DestroyDeploy(service string, version string) (*http.Response, error) {
@@ -85,8 +110,7 @@ func (c *Client) DestroyDeploy(service string, version string) (*http.Response, 
 	req.SetBasicAuth(c.Username, c.Password)
 	req.Header.Add("Content-Type", "application/json")
 
-	client := &http.Client{}
-	return client.Do(req)
+	return c.connection.Do(req)
 }
 
 func (c *Client) GetUnits(service string) ([]*Unit, error) {
@@ -99,8 +123,7 @@ func (c *Client) GetUnits(service string) ([]*Unit, error) {
 	req.SetBasicAuth(c.Username, c.Password)
 	req.Header.Add("Content-Type", "application/json")
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := c.connection.Do(req)
 	if err != nil {
 		return []*Unit{}, err
 	}
